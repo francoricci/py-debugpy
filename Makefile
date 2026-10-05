@@ -17,11 +17,10 @@ BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}setuptools>=0:devel/py-setuptools@${PY_FLA
 
 USES=		dos2unix python
 
-post-install:
-	${FIND} ${STAGEDIR}${PYTHON_SITELIBDIR} -name '*.so' -exec ${STRIP_CMD} {} +
-
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
 
 .if !exists(${LOCALBASE}/bin/cython)
-        USE_PYTHON+=    cython
+    USE_PYTHON+=    cython
 .endif
+
+.include <bsd.port.mk>
