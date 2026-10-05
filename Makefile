@@ -16,12 +16,12 @@ BUILD_DEPENDS=	${PYTHON_PKGNAMEPREFIX}setuptools>=0:devel/py-setuptools@${PY_FLA
 		${PYTHON_PKGNAMEPREFIX}wheel>=0:devel/py-wheel@${PY_FLAVOR}
 
 USES=		dos2unix python
-USE_PYTHON=	autoplist concurrent pep517
-.if !exists(${LOCALBASE}/bin/cython) && !exists(${LOCALBASE}/bin/cython3)
-USE_PYTHON+=	cython
-.endif
 
 post-install:
 	${FIND} ${STAGEDIR}${PYTHON_SITELIBDIR} -name '*.so' -exec ${STRIP_CMD} {} +
 
 .include <bsd.port.mk>
+
+.if !exists(${LOCALBASE}/bin/cython)
+        USE_PYTHON+=    cython
+.endif
